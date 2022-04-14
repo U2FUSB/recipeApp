@@ -5,6 +5,8 @@ plugins {
     // Plugin for Dokka - KDoc generating tool
     id("org.jetbrains.dokka") version "1.6.10"
     jacoco
+    // Plugin for Ktlint
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     application
 }
 
