@@ -2,6 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.6.10"
+    // Plugin for Dokka - KDoc generating tool
+    id("org.jetbrains.dokka") version "1.6.10"
     application
 }
 
@@ -14,6 +16,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    // For generating a Dokka Site from KDoc
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.6.10")
 }
 
 tasks.test {
