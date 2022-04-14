@@ -1,0 +1,41 @@
+//// AIMS:
+// need it to finish class
+// can use it personally
+// get into programming for myself
+
+//// plan of attack
+// TODO general structure
+// TODO setUp new repo
+// TODO updated gitignore
+    // TODO ignore /build folder
+    // TODO ignore ./gradle folder
+// TODO gradle tasks
+    // TODO KDoc and Dokka
+    // TODO code coverage
+    // TODO linting
+    // TODO fat jar
+// TODO actions for artifacts:
+    // TODO jar
+    // TODO JUNIT coverage reports
+    // TODO KDoc site
+// TODO github structure
+    // TODO Readme general structure
+    // TODO wiki general structure
+
+// TODO Recipe model
+    // TODO model itself
+    // TODO crud for Ingredients
+// TODO Ingredient model
+    // TODO model itself
+// TODO simple crud using ScannerInput
+// TODO two persistence formats (xml and json)
+// TODO advanced crud
+// TODO additional utility (additional to IndexChecker)
+
+// TODO FOR ANYTHING
+    // TODO KDoc description
+// TODO FOR ANY CONTROLLER FUNCTION
+    // TODO JUNIT test
+// TODO BEFORE MERGING ANY BRANCH
+    // TODO update Readme
+    // TODO update wiki
