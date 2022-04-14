@@ -4,16 +4,16 @@
 // get into programming for myself
 
 //// plan of attack
-// TODO setUp new repo
-// TODO updated gitignore
-    // TODO ignore /build folder
-    // TODO ignore ./gradle folder
-// TODO change user to wit-user
-// TODO gradle tasks
-    // TODO KDoc and Dokka
-    // TODO code coverage
-    // TODO linting
-    // TODO fat jar
+//setUp new repo
+// updated gitignore
+    // ignore /build folder
+    // ignore ./gradle folder
+// change user to wit-user
+//  gradle tasks
+    // KDoc and Dokka
+    // code coverage
+    // linting
+    //  fat jar
 // TODO actions for artifacts:
     // TODO jar
     // TODO JUNIT coverage reports
