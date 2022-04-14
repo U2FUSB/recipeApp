@@ -4,11 +4,11 @@
 // get into programming for myself
 
 //// plan of attack
-// TODO general structure
 // TODO setUp new repo
 // TODO updated gitignore
     // TODO ignore /build folder
     // TODO ignore ./gradle folder
+// TODO change user to wit-user
 // TODO gradle tasks
     // TODO KDoc and Dokka
     // TODO code coverage
@@ -22,6 +22,7 @@
     // TODO Readme general structure
     // TODO wiki general structure
 
+// TODO general structure
 // TODO Recipe model
     // TODO model itself
     // TODO crud for Ingredients
