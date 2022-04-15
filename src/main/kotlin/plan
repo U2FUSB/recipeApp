@@ -23,12 +23,14 @@
     // wiki general structure
 
 // general structure
-// TODO Recipe model
-    // model itself
-    // TODO crud for Ingredients
-// TODO Ingredient model
-    // TODO model itself
-// TODO simple crud using ScannerInput
+//Recipe model
+    // itself
+//Ingredient model
+    //model itself
+// view for recipe and ingredient
+// simple crud using ScannerInput
+// TODO crud logic for Recipe
+// TODO crud logic for Ingredients
 // TODO two persistence formats (xml and json)
 // TODO advanced crud
 // TODO additional utility (additional to IndexChecker)
