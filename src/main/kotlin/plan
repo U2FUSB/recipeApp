@@ -18,13 +18,13 @@
     // jar
     // JUNIT coverage reports
     // KDoc site
-// TODO github structure
-    // TODO Readme general structure
-    // TODO wiki general structure
+// github structure
+    // Readme general structure
+    // wiki general structure
 
-// TODO general structure
+// general structure
 // TODO Recipe model
-    // TODO model itself
+    // model itself
     // TODO crud for Ingredients
 // TODO Ingredient model
     // TODO model itself
