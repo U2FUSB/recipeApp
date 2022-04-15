@@ -1,4 +1,9 @@
+import controller.RecipeAPI
+import models.Recipe
 import utils.ScannerInput
+
+
+private val recipeAPI = RecipeAPI()
 
 /**Shows the menu of recipeApp.
  * Basis for UI
@@ -25,7 +30,7 @@ fun runMenu() {
     do {
         when (val menu = showMenu()) {
             1 -> addRecipe()
-            2 -> listRecipe()
+            2 -> listRecipes()
             3 -> updateRecipe()
             4 -> deleteRecipe()
             0 -> exitProgram()
@@ -49,14 +54,15 @@ fun updateRecipe() {
     println("updateRecipe")
 }
 
-fun listRecipe() {
-    //TODO("Not yet implemented")
-    println("listRecipe")
+fun listRecipes() {
+    println(recipeAPI.list())
 }
 
 fun addRecipe() {
-    //TODO("Not yet implemented")
-    println("addRecipe")
+    val title = ScannerInput.readNextLine("Please enter title of recipe: \n")
+    val instructions = ScannerInput.readNextLine(("Please enter/copy instructions of recipe in here: \n"))
+    //val ingredients = IngredientView.runMenu()
+    recipeAPI.add(Recipe(title, instructions))
 }
 
 /**Starting point of the program
