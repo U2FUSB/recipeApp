@@ -14,10 +14,10 @@
     // code coverage
     // linting
     // fat jar
-// TODO actions for artifacts:
-    // TODO jar
-    // TODO JUNIT coverage reports
-    // TODO KDoc site
+//actions for artifacts:
+    // jar
+    // JUNIT coverage reports
+    // KDoc site
 // TODO github structure
     // TODO Readme general structure
     // TODO wiki general structure
