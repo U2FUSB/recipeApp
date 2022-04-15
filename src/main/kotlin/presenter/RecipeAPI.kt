@@ -1,9 +1,9 @@
-package controller
+package presenter
 
 import models.Recipe
 
 class RecipeAPI {
-    var recipes = ArrayList<Recipe>()
+    private var recipes = ArrayList<Recipe>()
 
     fun add(recipe: Recipe) {
         recipes.add(recipe)
