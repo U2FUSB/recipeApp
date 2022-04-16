@@ -29,6 +29,8 @@
     //model itself
 // view for recipe and ingredient
 // simple crud using ScannerInput
+// Dokka description for every function
+// TODO JUnit Tests
 // TODO crud logic for Recipe
 // TODO crud logic for Ingredients
 // TODO two persistence formats (xml and json)
