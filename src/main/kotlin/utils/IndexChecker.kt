@@ -1,5 +1,10 @@
 package utils
 
+/**
+ * @author niklas7U
+ * @since V 0
+ * @constructor Utility IndexChecker
+ * */
 object IndexChecker {
 
     @JvmStatic

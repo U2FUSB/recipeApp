@@ -2,6 +2,12 @@ package utils
 
 import java.util.*
 
+/**
+ * @author Siobhan Drohan
+ * @author Mairead Meagher
+ * @since V 0
+ * @constructor Utility ScannerInput
+ * */
 object ScannerInput {
     @JvmStatic
     fun readNextInt(prompt: String?):Int {
@@ -14,7 +20,7 @@ object ScannerInput {
             }
         } while(true)
     }
-
+    @JvmStatic
     fun readNextDouble(prompt: String?):Double {
         do {
             try {
