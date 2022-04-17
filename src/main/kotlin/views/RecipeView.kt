@@ -92,8 +92,13 @@ class RecipeView {
      * @since V 0
      * */
     private fun deleteRecipe() {
-        //TODO("deleteRecipe Not yet implemented")
-        println("deleteRecipe")
+        val indexToDelete = ScannerInput.readNextInt("Enter the index of the recipe to delete: ")
+        val recipeToDelete = recipeAPI.delete(indexToDelete)
+        if (recipeToDelete != null) {
+            println("Delete Successful! Deleted Recipe: ${recipeToDelete.recipeTitle}")
+        } else {
+            println("Delete NOT Successful")
+        }
     }
 
     /**
@@ -102,8 +107,15 @@ class RecipeView {
      * @since V 0
      * */
     private fun updateRecipe() {
-        //TODO("updateRecipe Not yet implemented")
-        println("updateRecipe")
+        val indexToUpdate = ScannerInput.readNextInt("Enter the index of the Recipe to update:\n")
+        val title = ScannerInput.readNextLine("Please enter title of recipe: \n")
+        val instructions = ScannerInput.readNextLine(("Please enter/copy instructions of recipe in here: \n"))
+        val ingredients = ingredientView.runMenu()
+        if (recipeAPI.update(indexToUpdate, Recipe(title, instructions, ingredients))) {
+            println("Update Successful")
+        } else {
+            println("Update Failed")
+        }
     }
 
     /**
@@ -112,7 +124,6 @@ class RecipeView {
      * @since V 0
      **/
     private fun listRecipes() {
-        //TODO listRecipes not beautiful enough yet
         println(recipeAPI.list())
     }
 
