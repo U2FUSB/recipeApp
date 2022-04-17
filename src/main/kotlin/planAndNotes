@@ -44,3 +44,13 @@
 // TODO BEFORE MERGING ANY BRANCH
     // TODO update Readme
     // TODO update wiki
+
+
+
+NOTES
+- make listing more "appealing" (both(but ingredients shall still be simpler))
+- no listing of empty lists (both)
+- make Ingredient menu easier to distinguish from recipe menu
+- test for indexes during input in view, cause no useless inputs (both)
+- need indexes to show up when updating or deleting
+- BUG: update a recipe ONLY allows to try one option of ingredient menu

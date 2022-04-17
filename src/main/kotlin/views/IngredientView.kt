@@ -79,13 +79,19 @@ class IngredientView {
         return ingredientAPI.get()
     }
 
+
     /**
      * deletes an ingredient, using it's index
      *
      * @since V 0*/
     private fun deleteIngredient() {
-        // TODO implement deleting ingredients
-        ingredientAPI.delete()
+        val indexToDelete = ScannerInput.readNextInt("Enter the index of the ingredient to delete: ")
+        val ingredientToDelete = ingredientAPI.delete(indexToDelete)
+        if (ingredientToDelete != null) {
+            println("Delete Successful! Deleted Ingredient: ${ingredientToDelete.ingredientName}")
+        } else {
+            println("Delete NOT Successful")
+        }
     }
 
     /**
@@ -105,11 +111,11 @@ class IngredientView {
     }
 
     /**
-     * list all ingredients
+     * lists all ingredients
      *
      * @since V 0*/
     private fun listIngredients() {
-        println(ingredientAPI.get())
+        println(ingredientAPI.list())
     }
 
     /**

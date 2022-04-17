@@ -32,6 +32,17 @@ class IngredientAPI {
     }
 
     /**
+     * Lists all Ingredients
+     *
+     * @return [ingredients.toString]
+     * @see toString
+     * @since V 0
+     * */
+    fun list(): String {
+        return ingredients.toString()
+    }
+
+    /**
      * updates a given ingredient by its index
      *
      * @param [indexToUpdate]: Int
@@ -54,9 +65,10 @@ class IngredientAPI {
      * deletes a given ingredient
      *
      * @since V 0*/
-    fun delete() {
-        println("not implemented yet")
-    }
+    fun delete(indexToDelete: Int): Ingredient? =
+        if (IndexChecker.isValidIndex(indexToDelete, ingredients)) {
+            ingredients.removeAt(indexToDelete)
+        } else null
 
     private fun findIngredient(index: Int): Ingredient? =
         if (IndexChecker.isValidIndex(index, ingredients)) {
