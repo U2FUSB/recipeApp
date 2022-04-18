@@ -9,7 +9,7 @@ package models
  * @since V 0
  * @constructor Creates a new instance of Recipe
  * */
-data class Recipe(var recipeTitle: String,
-             var recipeInstructions: String,
-             var recipeIngredients: ArrayList<Ingredient>
+data class Recipe<T>(var recipeTitle: String,
+                     var recipeInstructions: String,
+                     var recipeIngredients: ArrayList<Ingredient>
 )

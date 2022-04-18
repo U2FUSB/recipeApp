@@ -21,6 +21,10 @@ dependencies {
     testImplementation(kotlin("test"))
     // For generating a Dokka Site from KDoc
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.6.10")
+    // https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream
+    implementation("com.thoughtworks.xstream:xstream:1.4.19")
+    // https://mvnrepository.com/artifact/org.codehaus.jettison/jettison
+    implementation("org.codehaus.jettison:jettison:1.4.1")
 }
 
 tasks.test {

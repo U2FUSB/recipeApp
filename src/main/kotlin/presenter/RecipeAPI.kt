@@ -1,7 +1,9 @@
 package presenter
 
 import models.Recipe
+import persistence.Serializer
 import utils.IndexChecker
+import kotlin.jvm.Throws
 
 /**
  * Manages the [recipes] ArrayList
@@ -10,8 +12,9 @@ import utils.IndexChecker
  * @since V 0
  * @constructor Creates a new instance of RecipeAPI
  * */
-class RecipeAPI {
-    private var recipes = ArrayList<Recipe>()
+class RecipeAPI (serializerType: Serializer) {
+    private var serializer: Serializer = serializerType
+    private var recipes = ArrayList<Recipe<Any?>>()
 
     /**
      * adds a given Recipe to the [recipes] ArrayList
@@ -19,8 +22,8 @@ class RecipeAPI {
      * @param [recipe]: Recipe
      * @since V 0
      * */
-    fun add(recipe: Recipe) {
-        recipes.add(recipe)
+    fun add(recipe: Recipe<Any?>?) {
+        recipes.add(recipe!!)
     }
 
     /**
@@ -50,7 +53,7 @@ class RecipeAPI {
      * @return [Boolean] representing success or failure
      * @since V 0
      * */
-    fun update(indexToUpdate: Int, recipe: Recipe): Boolean {
+    fun update(indexToUpdate: Int, recipe: Recipe<Any?>): Boolean {
         val foundRecipe = findRecipe(indexToUpdate)
         if (foundRecipe != null) {
             foundRecipe.recipeTitle = recipe.recipeTitle
@@ -61,7 +64,7 @@ class RecipeAPI {
         return false
     }
 
-    fun findRecipe(index: Int): Recipe? =
+    fun findRecipe(index: Int): Recipe<Any?>? =
         if (IndexChecker.isValidIndex(index, recipes)) {
             recipes[index]
         } else null
@@ -72,7 +75,7 @@ class RecipeAPI {
      * @return the recipe of type [Recipe], or [null] in case of failure
      * @since V 0
      * */
-    fun delete(indexToDelete: Int): Recipe? =
+    fun delete(indexToDelete: Int): Recipe<Any?>? =
         if (IndexChecker.isValidIndex(indexToDelete, recipes)) {
             recipes.removeAt(indexToDelete)
         } else null
@@ -86,10 +89,16 @@ class RecipeAPI {
     fun numberOfRecipes(): Int =
         recipes.size
 
-    fun get(): ArrayList<Recipe> {
+    /**
+     * returns the whole recipe arraylist
+     *
+     * @return [recipes]
+     * @since V 1*/
+    fun get(): ArrayList<Recipe<Any?>> {
         return recipes
     }
-    private fun formatRecipes(recipesToFormat : List<Recipe>) : String =
+
+    private fun formatRecipes(recipesToFormat : List<Recipe<Any?>>) : String =
         recipesToFormat.joinToString{ """
             |
             | 
@@ -115,4 +124,23 @@ class RecipeAPI {
             |__________________________________________________________________________________
             |""".trimMargin() }
 
+    /**
+     * loads existing arraylist from persistent file (xml or json)
+     *
+     * @see [serializer.read]
+     * @since V 1*/
+    @Throws(Exception::class)
+    fun load() {
+        recipes = serializer.read() as ArrayList<Recipe<Any?>>
+    }
+
+    /**
+     * saves actual arraylist in persistent file (xml or json)
+     *
+     * @see [serializer.write]
+     * @since V 1*/
+    @Throws(Exception::class)
+    fun store() {
+        serializer.write(recipes)
+    }
 }
