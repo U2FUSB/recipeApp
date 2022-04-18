@@ -2,8 +2,9 @@ package views
 
 import models.Ingredient
 import presenter.IngredientAPI
+import utils.IndexChecker
 import utils.ScannerInput
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 /**
  * Submenu which manages applying Ingredients to a recipe
@@ -29,17 +30,17 @@ class IngredientView {
         return ScannerInput.readNextInt("""
         > 
         > 
-        > ----------------------------
-        > | RECIPE MANAGEMENT APP    |
-        > ----------------------------
-        > | INGREDIENT MENU          |
-        > |   1) Add an ingredient   |
-        > |   2) List ingredients    |
-        > |   3) Update an ingredient|
-        > |   4) Delete an ingredient|
-        > ----------------------------
-        > |   0) Accept ingredients  |
-        > ----------------------------
+        > ****************************
+        > + RECIPE MANAGEMENT APP    +
+        > ****************************
+        > + INGREDIENT MENU          +
+        > +   1) Add an ingredient   +
+        > +   2) List ingredients    +
+        > +   3) Update an ingredient+
+        > +   4) Delete an ingredient+
+        > ****************************
+        > +   0) Accept ingredients  +
+        > ****************************
         > ==>> 
     """.trimMargin(">"))
     }
@@ -65,7 +66,11 @@ class IngredientView {
      * @see [deleteIngredient]
      * @see [acceptIngredients]
      * */
-    fun runMenu():ArrayList<Ingredient> {
+    fun runMenu(existingIngredients: ArrayList<Ingredient>? = null):ArrayList<Ingredient> {
+        ingredientsAccepted = false
+        if (existingIngredients != null) {
+            ingredientAPI.addAll(existingIngredients)
+        }
         do {
             when (val menu = showMenu()) {
                 1 -> addIngredient()
@@ -85,12 +90,21 @@ class IngredientView {
      *
      * @since V 0*/
     private fun deleteIngredient() {
-        val indexToDelete = ScannerInput.readNextInt("Enter the index of the ingredient to delete: ")
-        val ingredientToDelete = ingredientAPI.delete(indexToDelete)
-        if (ingredientToDelete != null) {
-            println("Delete Successful! Deleted Ingredient: ${ingredientToDelete.ingredientName}")
+        if (ingredientAPI.numberOfIngredients() > 0) {
+            listIngredients()
+            val indexToDelete = ScannerInput.readNextInt("Enter the index of the ingredient to delete: ")
+            if (IndexChecker.isValidIndex(indexToDelete, ingredientAPI.get())) {
+                val ingredientToDelete = ingredientAPI.delete(indexToDelete)
+                if (ingredientToDelete != null) {
+                    println("Delete Successful! Deleted Ingredient: ${ingredientToDelete.ingredientName}")
+                } else {
+                    println("Delete NOT Successful")
+                }
+            } else {
+                println("Index does not exist. Delete Failed")
+            }
         } else {
-            println("Delete NOT Successful")
+            println("no ingredients stored yet")
         }
     }
 
@@ -99,14 +113,19 @@ class IngredientView {
      *
      * @since V 0*/
     private fun updateIngredient() {
+        listIngredients()
         val indexToUpdate = ScannerInput.readNextInt("Enter the index of the Ingredient to update:\n")
-        val name = ScannerInput.readNextLine("Please enter name for Ingredient:\n")
-        val amount = ScannerInput.readNextInt("Please enter amount for Ingredient:\n")
-        val unit = ScannerInput.readNextLine("Please enter unit for amount:\n")
-        if (ingredientAPI.update(indexToUpdate, Ingredient(name, amount, unit))) {
+        if (IndexChecker.isValidIndex(indexToUpdate, ingredientAPI.get())) {
+            val name = ScannerInput.readNextLine("Please enter name for Ingredient:\n")
+            val amount = ScannerInput.readNextInt("Please enter amount for Ingredient:\n")
+            val unit = ScannerInput.readNextLine("Please enter unit for amount:\n")
+            if (ingredientAPI.update(indexToUpdate, Ingredient(name, amount, unit))) {
                 println("Update Successful")
-        } else {
+            } else {
                 println("Update Failed")
+            }
+        } else {
+            println("Index does not exist. Update Failed")
         }
     }
 
@@ -115,7 +134,11 @@ class IngredientView {
      *
      * @since V 0*/
     private fun listIngredients() {
-        println(ingredientAPI.list())
+        if (ingredientAPI.numberOfIngredients() > 0) {
+            println(ingredientAPI.list())
+        } else {
+            println("no ingredients stored yet")
+        }
     }
 
     /**

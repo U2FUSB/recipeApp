@@ -1,7 +1,9 @@
 package views
 
+import models.Ingredient
 import models.Recipe
 import presenter.RecipeAPI
+import utils.IndexChecker
 import utils.ScannerInput
 
 /**
@@ -69,9 +71,43 @@ class RecipeView {
                 3 -> updateRecipe()
                 4 -> deleteRecipe()
                 0 -> exitProgram()
+                -99 -> createTestRecipe()
                 else -> println("Option $menu is invalid. Try another one")
             }
         } while (true)
+    }
+
+    private fun createTestRecipe() {
+        recipeAPI.add(
+            Recipe(
+                "Ham and eggs",
+                "Step 1\n" +
+                        "Beat eggs, milk, seasoned salt, salt, and black pepper together in a bowl.\n" +
+                        "\n" +
+                        "Step 2\n" +
+                        "Heat olive oil in a large non-stick skillet over medium-high heat; saute jalapeno in hot oil until slightly softened, 2 to 3 minutes. Add ham to jalapeno and cook until heated through, about 1 minute.\n" +
+                        "\n" +
+                        "Step 3\n" +
+                        "Pour egg mixture into ham mixture. Cook and stir until eggs are set but not dry, 3 to 5 minutes. Sprinkle 1/2 of the Cheddar cheese over eggs; cook and stir until cheese is melted. Transfer eggs to a plate and sprinkle remaining cheese over the top.",
+                arrayListOf(
+                    Ingredient("egg", 8, "piece"),
+                    Ingredient("milk", 3, "tablespoons"),
+                    Ingredient("salt", 1, "teespoon"),
+                    Ingredient("olive oil", 1, "cup"),
+                    Ingredient("Jalapeno", 1, "piece"),
+                    Ingredient("applewood-smoked ham", 1, "cup"),
+                    Ingredient("Cheddar cheese", 1, "cup")
+                )
+            )
+        )
+        recipeAPI.add(
+            Recipe("Buttersoup", "1. Melt Butter till melted", arrayListOf(Ingredient("Butter", 500, "g")))
+        )
+        recipeAPI.add(
+            Recipe("testRecipe", "this is not really a recipe, but whatever", arrayListOf(Ingredient("noHam", 240, "kg")))
+        )
+        println(recipeAPI.list())
+        println("\n\nTest recipes added")
     }
 
     /**
@@ -92,12 +128,21 @@ class RecipeView {
      * @since V 0
      * */
     private fun deleteRecipe() {
-        val indexToDelete = ScannerInput.readNextInt("Enter the index of the recipe to delete: ")
-        val recipeToDelete = recipeAPI.delete(indexToDelete)
-        if (recipeToDelete != null) {
-            println("Delete Successful! Deleted Recipe: ${recipeToDelete.recipeTitle}")
+        if (recipeAPI.numberOfRecipes() > 0) {
+            println(recipeAPI.list())
+            val indexToDelete = ScannerInput.readNextInt("Enter the index of the recipe to delete: ")
+            if (IndexChecker.isValidIndex(indexToDelete, recipeAPI.get())) {
+                val recipeToDelete = recipeAPI.delete(indexToDelete)
+                if (recipeToDelete != null) {
+                    println("Delete Successful! Deleted Recipe: ${recipeToDelete.recipeTitle}")
+                } else {
+                    println("Delete NOT Successful")
+                }
+            } else {
+                println("Index does not exist. Delete Failed")
+            }
         } else {
-            println("Delete NOT Successful")
+            println("no recipes stored yet")
         }
     }
 
@@ -107,14 +152,19 @@ class RecipeView {
      * @since V 0
      * */
     private fun updateRecipe() {
+        println(recipeAPI.list())
         val indexToUpdate = ScannerInput.readNextInt("Enter the index of the Recipe to update:\n")
-        val title = ScannerInput.readNextLine("Please enter title of recipe: \n")
-        val instructions = ScannerInput.readNextLine(("Please enter/copy instructions of recipe in here: \n"))
-        val ingredients = ingredientView.runMenu()
-        if (recipeAPI.update(indexToUpdate, Recipe(title, instructions, ingredients))) {
-            println("Update Successful")
+        if (IndexChecker.isValidIndex(indexToUpdate, recipeAPI.get())) {
+            val title = ScannerInput.readNextLine("Please enter title of recipe: \n")
+            val instructions = ScannerInput.readNextLine(("Please enter/copy instructions of recipe in here: \n"))
+            val ingredients = ingredientView.runMenu(recipeAPI.findRecipe(indexToUpdate)?.recipeIngredients)
+            if (recipeAPI.update(indexToUpdate, Recipe(title, instructions, ingredients))) {
+                println("Update Successful")
+            } else {
+                println("Update Failed")
+            }
         } else {
-            println("Update Failed")
+            println("Index does not exist. Update Failed")
         }
     }
 
@@ -124,7 +174,30 @@ class RecipeView {
      * @since V 0
      **/
     private fun listRecipes() {
-        println(recipeAPI.list())
+        if (recipeAPI.numberOfRecipes() > 0) {
+            val option = ScannerInput.readNextInt(
+                """
+                  > --------------------------------
+                  > |   1) View ALL recipes        |
+                  > |   2) View A SPECIFIC recipe  |
+                  > --------------------------------
+         > ==>> """.trimMargin(">"))
+            when (option) {
+                1 -> println(recipeAPI.list())
+                2 -> {
+                    println(recipeAPI.listAllNames())
+                    val indexToList = ScannerInput.readNextInt("\nEnter the index of desired recipe: ")
+                    if (IndexChecker.isValidIndex(indexToList, recipeAPI.get())) {
+                        println(recipeAPI.list(indexToList))
+                    } else {
+                        println("Invalid index")
+                    }
+                }
+                else -> println("Invalid option entered: $option")
+            }
+        } else {
+            println("no recipes stored yet")
+        }
     }
 
     /**

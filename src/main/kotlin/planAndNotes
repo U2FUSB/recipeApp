@@ -30,12 +30,14 @@
 // view for recipe and ingredient
 // simple crud using ScannerInput
 // Dokka description for every function
-// TODO JUnit Tests
-// TODO crud logic for Recipe
-// TODO crud logic for Ingredients
+//JUnit Tests
+// crud logic for Recipe
+// crud logic for Ingredients
+// advanced crud
+    // more differentiated listing
 // TODO two persistence formats (xml and json)
-// TODO advanced crud
 // TODO additional utility (additional to IndexChecker)
+// TODO some special function
 
 // TODO FOR ANYTHING
     // TODO KDoc description
@@ -48,9 +50,6 @@
 
 
 NOTES
-- make listing more "appealing" (both(but ingredients shall still be simpler))
-- no listing of empty lists (both)
-- make Ingredient menu easier to distinguish from recipe menu
-- test for indexes during input in view, cause no useless inputs (both)
-- need indexes to show up when updating or deleting
-- BUG: update a recipe ONLY allows to try one option of ingredient menu
+
+nothing here right now
+

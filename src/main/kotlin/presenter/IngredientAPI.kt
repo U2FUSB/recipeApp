@@ -38,9 +38,12 @@ class IngredientAPI {
      * @see toString
      * @since V 0
      * */
-    fun list(): String {
-        return ingredients.toString()
-    }
+    fun list(): String =
+        if (ingredients.isEmpty()) {
+            "No notes stored"
+        } else {
+            formatIngredients(ingredients)
+        }
 
     /**
      * updates a given ingredient by its index
@@ -74,4 +77,29 @@ class IngredientAPI {
         if (IndexChecker.isValidIndex(index, ingredients)) {
             ingredients[index]
         } else null
+
+    /**
+     * adds all existing Ingredients to the Arraylist of Ingredients at once
+     *
+     * @param existingIngredients
+     * @since V 0*/
+    fun addAll(existingIngredients: java.util.ArrayList<Ingredient>) {
+        ingredients.addAll(existingIngredients)
+    }
+
+    /**
+     * counts Ingredients in [ingredients] Arraylist
+     *
+     * @return [ingredients.size]
+     * @see [size]
+     * @since V 0*/
+    fun numberOfIngredients(): Int =
+        ingredients.size
+
+    private fun formatIngredients(ingredientsToFormat : List<Ingredient>) : String =
+        ingredientsToFormat.joinToString{ "\n${ingredients.indexOf(it)} : " +
+                "${it.ingredientName} " +
+                "${it.ingredientAmount} " +
+                it.ingredientUnit
+        }
 }
