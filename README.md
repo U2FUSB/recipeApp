@@ -34,4 +34,4 @@ A very basic cookingRecipe-management-application. Allows one to manage their **
 - **Dokka PLUGIN:** id("org.jetbrains.dokka") version "1.6.10"
 - **ktlint PLUGING:** id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 - **XStream DEPENDENCY:** implementation("com.thoughtworks.xstream:xstream:1.4.19")
-- **Jettison DEPENDENCY:** implementation("org.codehaus.jettison:jettison:1.4.1")
+- **Jettison DEPENDENCY:**implementation("org.codehaus.jettison:jettison:1.4.1")
