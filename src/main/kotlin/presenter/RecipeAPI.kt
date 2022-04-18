@@ -104,9 +104,13 @@ class RecipeAPI {
             |                                                                                   
             |                                                                                   
             |INGREDIENTS:
-            |____________                                                                      
-            |                                                                                   
-            |${it.recipeIngredients.map{"\n${it.ingredientName } ${it.ingredientAmount} ${it.ingredientUnit}\n"}}                                                           
+            |____________                                                                                                                                                         
+            |${it
+            .recipeIngredients.map{"\n${it.ingredientName } ${it.ingredientAmount} ${it.ingredientUnit}"}
+            .toString()
+            .removePrefix("[")
+            .removeSuffix("]")
+            }                                                           
             |__________________________________________________________________________________
             |__________________________________________________________________________________
             |""".trimMargin() }

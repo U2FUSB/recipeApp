@@ -39,6 +39,21 @@ object ScannerInput {
     }
 
     @JvmStatic
+    fun readAllNextLines(prompt: String?): String {
+        println(prompt)
+        val input: StringBuilder = java.lang.StringBuilder()
+        val finalizer = readNextLine("but first, enter the LAST LINE you put in. It will finalise your input:\n")
+        println("Now you can enter what you wanted to enter. \n!!Remember: Last LINE must be \"${finalizer}\"!!\n")
+        var nextLine: String
+        val scanner = Scanner(System.`in`)
+        do  {
+            nextLine = scanner.nextLine()
+            input.append("${nextLine}\n")
+        } while (nextLine != finalizer)
+        return input.toString().replace(finalizer, "")
+    }
+
+    @JvmStatic
     fun readNextChar(prompt: String?): Char {
         print(prompt)
         return Scanner(System.`in`).next()[0]

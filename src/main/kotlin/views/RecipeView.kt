@@ -207,7 +207,7 @@ class RecipeView {
      **/
     private fun addRecipe() {
         val title = ScannerInput.readNextLine("Please enter title of recipe: \n")
-        val instructions = ScannerInput.readNextLine(("Please enter/copy instructions of recipe in here: \n"))
+        val instructions = ScannerInput.readAllNextLines("Please enter/copy instructions of recipe in here, ")
         val ingredients = IngredientView().runMenu()
         recipeAPI.add(Recipe(title, instructions, ingredients))
     }
