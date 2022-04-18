@@ -15,7 +15,7 @@ import utils.ScannerInput
  * */
 class RecipeView {
     private val recipeAPI = RecipeAPI()
-    private val ingredientView = IngredientView()
+    //private val ingredientView = IngredientView()
 
     /**
      * Shows the Recipe Menu
@@ -129,7 +129,7 @@ class RecipeView {
      * */
     private fun deleteRecipe() {
         if (recipeAPI.numberOfRecipes() > 0) {
-            println(recipeAPI.list())
+            println(recipeAPI.listAllNames())
             val indexToDelete = ScannerInput.readNextInt("Enter the index of the recipe to delete: ")
             if (IndexChecker.isValidIndex(indexToDelete, recipeAPI.get())) {
                 val recipeToDelete = recipeAPI.delete(indexToDelete)
@@ -152,12 +152,12 @@ class RecipeView {
      * @since V 0
      * */
     private fun updateRecipe() {
-        println(recipeAPI.list())
+        println(recipeAPI.listAllNames())
         val indexToUpdate = ScannerInput.readNextInt("Enter the index of the Recipe to update:\n")
         if (IndexChecker.isValidIndex(indexToUpdate, recipeAPI.get())) {
             val title = ScannerInput.readNextLine("Please enter title of recipe: \n")
             val instructions = ScannerInput.readNextLine(("Please enter/copy instructions of recipe in here: \n"))
-            val ingredients = ingredientView.runMenu(recipeAPI.findRecipe(indexToUpdate)?.recipeIngredients)
+            val ingredients = IngredientView().runMenu(recipeAPI.findRecipe(indexToUpdate)?.recipeIngredients)
             if (recipeAPI.update(indexToUpdate, Recipe(title, instructions, ingredients))) {
                 println("Update Successful")
             } else {
@@ -208,7 +208,7 @@ class RecipeView {
     private fun addRecipe() {
         val title = ScannerInput.readNextLine("Please enter title of recipe: \n")
         val instructions = ScannerInput.readNextLine(("Please enter/copy instructions of recipe in here: \n"))
-        val ingredients = ingredientView.runMenu()
+        val ingredients = IngredientView().runMenu()
         recipeAPI.add(Recipe(title, instructions, ingredients))
     }
 

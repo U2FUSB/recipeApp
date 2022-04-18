@@ -51,5 +51,6 @@
 
 NOTES
 
-nothing here right now
-
+- ability to copy ingredients
+- ingredients from wrong recipe are passed to ingredients menu
+- instructions copy does not work
