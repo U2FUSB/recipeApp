@@ -2,9 +2,11 @@ package views
 
 import models.Ingredient
 import models.Recipe
+import persistence.XMLSerializer
 import presenter.RecipeAPI
 import utils.IndexChecker
 import utils.ScannerInput
+import java.io.File
 
 /**
  * Runs the program, shows the Recipe Menu to the User and allows Interaction.
@@ -14,8 +16,8 @@ import utils.ScannerInput
  * @constructor Creates a new instance of RecipeView
  * */
 class RecipeView {
-    private val recipeAPI = RecipeAPI()
-    //private val ingredientView = IngredientView()
+    private val recipeAPI = RecipeAPI(XMLSerializer(File("recipes.xml")))
+    //private val recipeAPI = RecipeAPI(JSONSerializer(File("recipes.json")))
 
     /**
      * Shows the Recipe Menu
@@ -27,7 +29,6 @@ class RecipeView {
     private fun showMenu() : Int {
         return ScannerInput.readNextInt("""
         > 
-        > 
         > ---------------------------
         > | RECIPE MANAGEMENT APP   |
         > ---------------------------
@@ -36,6 +37,9 @@ class RecipeView {
         > |   2) List recipes       |
         > |   3) Update a recipe    |
         > |   4) Delete a recipe    |
+        > ---------------------------
+        > |   10) Save recipes      |
+        > |   11) Load recipes      |
         > ---------------------------
         > |   0) Exit               |
         > ---------------------------
@@ -71,10 +75,28 @@ class RecipeView {
                 3 -> updateRecipe()
                 4 -> deleteRecipe()
                 0 -> exitProgram()
+                10 -> saveRecipes()
+                11 -> loadRecipes()
                 -99 -> createTestRecipe()
                 else -> println("Option $menu is invalid. Try another one")
             }
         } while (true)
+    }
+
+    private fun loadRecipes() {
+        try {
+            recipeAPI.load()
+        } catch (e: Exception) {
+            System.err.println("Error reading to file: $e")
+        }
+    }
+
+    private fun saveRecipes() {
+        try {
+            recipeAPI.store()
+        } catch (e:Exception) {
+            System.err.println("Error writing to file: $e")
+        }
     }
 
     private fun createTestRecipe() {
@@ -207,7 +229,7 @@ class RecipeView {
      **/
     private fun addRecipe() {
         val title = ScannerInput.readNextLine("Please enter title of recipe: \n")
-        val instructions = ScannerInput.readNextLine(("Please enter/copy instructions of recipe in here: \n"))
+        val instructions = ScannerInput.readAllNextLines("Please enter/copy instructions of recipe in here, ")
         val ingredients = IngredientView().runMenu()
         recipeAPI.add(Recipe(title, instructions, ingredients))
     }
