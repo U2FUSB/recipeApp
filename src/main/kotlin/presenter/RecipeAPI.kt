@@ -29,6 +29,7 @@ class RecipeAPI (serializerType: Serializer) {
     /**
      * lists all recipes in [recipes] ArrayList
      *
+     * @param [indexOfRecipe]
      * @since V 0
      * */
     fun list(indexOfRecipe: Int? = null): String =
@@ -42,6 +43,12 @@ class RecipeAPI (serializerType: Serializer) {
                 }
             }
 
+    /**
+     * list the names from all recipes in [recipes] ArrayList
+     *
+     * @return [String] containing all [recipe.Title]
+     * @since V 2
+     * */
     fun listAllNames(): String =
         recipes.joinToString {"\nNumber ${recipes.indexOf(it)} : ${it.recipeTitle}" }
 
@@ -64,6 +71,13 @@ class RecipeAPI (serializerType: Serializer) {
         return false
     }
 
+    /**
+     * finds a recipe by its index
+     *
+     * @param [index]
+     * @return found [recipe] or null
+     * @since V 2
+     * */
     fun findRecipe(index: Int): Recipe<Any?>? =
         if (IndexChecker.isValidIndex(index, recipes)) {
             recipes[index]

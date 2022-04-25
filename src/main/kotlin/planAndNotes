@@ -35,9 +35,11 @@
 // crud logic for Ingredients
 // advanced crud
     // more differentiated listing
-// TODO two persistence formats (xml and json)
-// TODO additional utility (additional to IndexChecker)
-// TODO some special function
+// two persistence formats (xml and json)
+// additional utility (additional to IndexChecker)
+// TODO search for ingredients in recipe
+// TODO code coverage for json with helper
+// TODO update ghPage to explain all projects
 
 // TODO FOR ANYTHING
     // TODO KDoc description
@@ -46,7 +48,6 @@
 // TODO BEFORE MERGING ANY BRANCH
     // TODO update Readme
     // TODO update wiki
-
 
 
 NOTES

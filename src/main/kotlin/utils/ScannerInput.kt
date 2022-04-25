@@ -2,7 +2,8 @@ package utils
 
 import java.util.*
 
-/**
+/** Allows input management with [Scanner]
+ *
  * @author Siobhan Drohan
  * @author Mairead Meagher
  * @since V 0
@@ -38,6 +39,12 @@ object ScannerInput {
         return Scanner(System.`in`).nextLine()
     }
 
+    /** Reads every line and concatenates to one String.
+     * First it asks for a [finalizer] to know where to stop.
+     *
+     * @author Niklas7U
+     * @since V 1
+     * */
     @JvmStatic
     fun readAllNextLines(prompt: String?): String {
         println(prompt)
