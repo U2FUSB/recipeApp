@@ -22,7 +22,7 @@ class RecipeView {
     /**
      * Shows the Recipe Menu
      * Asks the User to enter a Number
-     * @since V 0
+     * @since V 2
      * @return Number entered by User
      * @see [ScannerInput.readNextInt]
      * */
@@ -37,6 +37,10 @@ class RecipeView {
         > |   2) List recipes       |
         > |   3) Update a recipe    |
         > |   4) Delete a recipe    |
+        > ---------------------------
+        > |   5) Find recipes       |
+        > |      containing         |
+        > |      ingredients        |
         > ---------------------------
         > |   10) Save recipes      |
         > |   11) Load recipes      |
@@ -74,6 +78,7 @@ class RecipeView {
                 2 -> listRecipes()
                 3 -> updateRecipe()
                 4 -> deleteRecipe()
+                5 -> findRecipesByIngredients()
                 0 -> exitProgram()
                 10 -> saveRecipes()
                 11 -> loadRecipes()
@@ -220,6 +225,14 @@ class RecipeView {
         } else {
             println("no recipes stored yet")
         }
+    }
+
+    private fun findRecipesByIngredients() {
+        val ingredient = ScannerInput.readNextLine("Put in the name of the ingredient you want to find recipes for: ")
+        val foundRecipes: ArrayList<Recipe<Any?>> = recipeAPI.findIngredient(ingredient) as ArrayList
+
+        println(recipeAPI.listAllNames(foundRecipes))
+
     }
 
     /**

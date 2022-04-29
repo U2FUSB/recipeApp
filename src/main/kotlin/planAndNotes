@@ -37,6 +37,7 @@
     // more differentiated listing
 // two persistence formats (xml and json)
 // additional utility (additional to IndexChecker)
+// TODO additional persistence
 // TODO search for ingredients in recipe
 // TODO code coverage for json with helper
 // TODO update ghPage to explain all projects

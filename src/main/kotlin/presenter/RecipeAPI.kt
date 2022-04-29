@@ -49,8 +49,10 @@ class RecipeAPI (serializerType: Serializer) {
      * @return [String] containing all [recipe.Title]
      * @since V 2
      * */
-    fun listAllNames(): String =
-        recipes.joinToString {"\nNumber ${recipes.indexOf(it)} : ${it.recipeTitle}" }
+    fun listAllNames(foundRecipes: ArrayList<Recipe<Any?>>? = null): String {
+        val recipesToList: ArrayList<Recipe<Any?>> = foundRecipes ?: recipes
+        return recipesToList.joinToString { "\nNumber ${recipes.indexOf(it)} : ${it.recipeTitle}" }
+    }
 
     /**
      * updates a recipe, using its index and user input
@@ -156,5 +158,16 @@ class RecipeAPI (serializerType: Serializer) {
     @Throws(Exception::class)
     fun store() {
         serializer.write(recipes)
+    }
+
+    /**
+     * Searches existing recipes in [recipes] for provided substring [ingredient] and returns them as List of Recipes of Any
+     *
+     * @param [ingredient] A string provided with user input. Might be an ingredient, or just a substring of one
+     * @return List<Recipe<Any?>> all recipes containing the substring "[ingredient]" in - at least - one of their ingredient names
+     * @since V 2
+     *  */
+    fun findIngredient(ingredient: String): List<Recipe<Any?>> {
+        return recipes.filter { it.recipeIngredients.any { it.ingredientName.contains(ingredient) } }
     }
 }
