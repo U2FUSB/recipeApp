@@ -84,7 +84,6 @@ class IngredientView {
         return ingredientAPI.get()
     }
 
-
     /**
      * deletes an ingredient, using it's index
      *
