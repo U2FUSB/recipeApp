@@ -10,9 +10,7 @@ A very basic cookingRecipe-management-application. Allows one to manage their **
 - sub-crud-menu to manage ingredients of chosen recipe
 - advanced listing options with descriptions and ingredients
 - persistent saving with xml and json
-
-## PLANED USER FEATURES
-- additional sorting/recalculating of amount of ingredients, based on their units 
+- searching for recipes containing specific ingredients
 
 ## DEVELOPER FEATURES
 - implemented kdoc
@@ -34,4 +32,4 @@ A very basic cookingRecipe-management-application. Allows one to manage their **
 - **Dokka PLUGIN:** id("org.jetbrains.dokka") version "1.6.10"
 - **ktlint PLUGING:** id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 - **XStream DEPENDENCY:** implementation("com.thoughtworks.xstream:xstream:1.4.19")
-- **Jettison DEPENDENCY:**implementation("org.codehaus.jettison:jettison:1.4.1")
+- **Jettison DEPENDENCY:** implementation("org.codehaus.jettison:jettison:1.4.1")
