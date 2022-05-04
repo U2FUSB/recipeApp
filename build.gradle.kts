@@ -25,6 +25,11 @@ dependencies {
     implementation("com.thoughtworks.xstream:xstream:1.4.19")
     // https://mvnrepository.com/artifact/org.codehaus.jettison/jettison
     implementation("org.codehaus.jettison:jettison:1.4.1")
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.2")
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.2")
+
 }
 
 tasks.test {

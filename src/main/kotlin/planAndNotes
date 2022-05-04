@@ -38,9 +38,9 @@
 // two persistence formats (xml and json)
 // additional utility (additional to IndexChecker)
 // TODO additional persistence
-// TODO search for ingredients in recipe
-// TODO code coverage for json with helper
-// TODO update ghPage to explain all projects
+// search for ingredients in recipe
+//  code coverage for json with helper
+//  update ghPage to explain all projects
 
 // TODO FOR ANYTHING
     // TODO KDoc description
